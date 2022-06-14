@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useCallback } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -6,13 +7,17 @@ import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
+import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SettingsIcon from '@mui/icons-material/Settings';
-
-
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { auth } from '../../misc/firebase';
+import { useProfile } from '../../context/profile.context';
+import {useModalState} from '../../misc/custom.hooks'
+ 
 const pages=[
   {page:'Home', link:'/home'},
   {page:'Category',link:'/category'},
@@ -24,6 +29,8 @@ const settings = ['Logout'];
 const TopNav = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const {profile} =useProfile();
+  const {close } = useModalState();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -39,6 +46,12 @@ const TopNav = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const onSignOut = useCallback(() => {
+      auth.signOut();
+      close();
+  }, [close]);
+  
 
   return (
     <div>
@@ -113,8 +126,34 @@ const TopNav = () => {
               </Button>
             ))}
           </Box>
+    
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            sx={{
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'orange',
+              textDecoration: 'none',
+            }}
+          >
+            Hi {profile.name}
+          </Typography>
 
-          <Box sx={{ flexGrow: 0 }}>
+          <IconButton color="inherit" aria-label="add to shopping cart">
+          
+                <Badge badgeContent={4} color="secondary">
+                  <AddShoppingCartIcon />
+                </Badge>
+          
+          </IconButton>
+
+
+          <Box sx={{ flexGrow: 0}} >
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} color="inherit" sx={{ p: 0 }}>
                 <SettingsIcon/>
@@ -138,7 +177,7 @@ const TopNav = () => {
             >
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+                  <Button onClick={onSignOut}>{setting}</Button>
                 </MenuItem>
               ))}
             </Menu>

@@ -17,7 +17,7 @@ function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="/">
         Ecom
       </Link>{' '}
       {new Date().getFullYear()}
@@ -59,10 +59,7 @@ const SignIn=()=> {
           sm={4}
           md={7}
           sx={{
-            backgroundImage: 'url(https://source.unsplash.com/random)',
-            backgroundRepeat: 'no-repeat',
-            backgroundColor: (t) =>
-              t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
+            backgroundImage: 'url(https://www.corporatevision-news.com/wp-content/uploads/2021/04/ecommerce.jpg)',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
           }}
