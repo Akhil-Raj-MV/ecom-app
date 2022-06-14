@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router';
-import { Container, Loader } from 'rsuite';
+import {Container,Loader} from 'rsuite';
 import { useProfile } from '../context/profile.context';
+
 
 const PrivateRoute = ({ children, ...routeProps }) => {
   
@@ -10,7 +11,7 @@ const PrivateRoute = ({ children, ...routeProps }) => {
     if (isLoading && !profile) {
         return (
           <Container>
-            <Loader center vertical size="md" content="Loading" speed="slow" />
+            <Loader center vertical size="md" content="loading" speed="slow" />
           </Container>
         );
       }
