@@ -24,6 +24,26 @@ const Home = () => {
       setCart(itemToBeAdded.cart)
   }
 
+  const updateCartHandler=async (lineItemId,quantity)=>{
+    const response = await commerce.cart.update(lineItemId, { quantity });
+    setCart(response.cart);
+  }
+
+  const removeFromCartHandler=async(lineItemId)=>{
+      const response=await commerce.cart.remove(lineItemId);
+      setCart(response.cart)
+  }
+
+  const emptyCartHandler=async()=>{
+    const response= await commerce.cart.empty();
+    setCart(response.cart);
+  }
+
+  const refreshCartHandler=async()=>{
+      const response=await commerce.cart.refresh();
+      setCart(response.cart);
+  }
+
   
 
   useEffect(()=>{
@@ -36,13 +56,25 @@ const Home = () => {
       <TopNav cartItemNo={cart.total_items}/>
       <Switch>
             <Route exact path="/">
-                <ProductLayout products={products} onAddToCart={addToCartHandler}/>
+                <ProductLayout 
+                      products={products} 
+                      onAddToCart={addToCartHandler}
+                />
             </Route>
             <Route exact path="/home">
-                <ProductLayout products={products} onAddToCart={addToCartHandler}/>
+                <ProductLayout 
+                      products={products} 
+                      onAddToCart={addToCartHandler}
+                />
             </Route>
             <Route exact path="/cart">
-                <CartLayout cart={cart}  />
+                <CartLayout 
+                    cart={cart} o
+                    onRemoveFromCart={removeFromCartHandler} 
+                    onEmptyCart={emptyCartHandler} 
+                    onRefreshCart={refreshCartHandler}
+                    onUpdateCartQuantity={updateCartHandler}
+                />
             </Route>
       </Switch>
     </div>

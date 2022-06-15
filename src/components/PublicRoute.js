@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router';
-import { Container, Loader } from 'rsuite';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 import { useProfile } from '../context/profile.context';
 
 const PublicRoute = ({ children, ...routeProps }) => {
@@ -9,9 +10,14 @@ const PublicRoute = ({ children, ...routeProps }) => {
 
   if (isLoading && !profile) {
     return (
-      <Container>
-        <Loader center vertical size="md" content="Loading" speed="slow" />
-      </Container>
+      <Box
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          minHeight="100vh"
+        >
+              <CircularProgress/>
+      </Box>
     );
   }
 
