@@ -14,6 +14,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {Link} from 'react-router-dom'
 import { auth } from '../../misc/firebase';
 import { useProfile } from '../../context/profile.context';
 import {useModalState} from '../../misc/custom.hooks'
@@ -26,7 +27,7 @@ const pages=[
 ]
 const settings = ['Logout'];
 
-const TopNav = () => {
+const TopNav = ({cartItemNo}) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const {profile} =useProfile();
@@ -51,6 +52,8 @@ const TopNav = () => {
       auth.signOut();
       close();
   }, [close]);
+
+
   
 
   return (
@@ -144,12 +147,10 @@ const TopNav = () => {
             Hi {profile.name}
           </Typography>
 
-          <IconButton color="inherit" aria-label="add to shopping cart">
-          
-                <Badge badgeContent={4} color="secondary">
+          <IconButton color="inherit" aria-label="add to shopping cart" component={Link} to="/cart">
+                <Badge badgeContent={cartItemNo} color="error" showZero>
                   <AddShoppingCartIcon />
                 </Badge>
-          
           </IconButton>
 
 

@@ -1,10 +1,10 @@
 import React from 'react';
 import Products from "./Products/Products";
 
-const ProductLayout = ({products}) => {
+const ProductLayout = ({products,onAddToCart}) => {
   return (
         <div style={{margin:"30px"}}>
-            <Products products={products}/>
+            <Products products={products} onAddToCart={onAddToCart}/>
         </div>
   )
 }

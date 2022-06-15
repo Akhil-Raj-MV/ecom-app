@@ -7,8 +7,9 @@ import CardMedia from '@mui/material/CardMedia';
 import IconButton from '@mui/material/IconButton';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
-// eslint-disable-next-line no-unused-vars
-const Product = ({product}) => {
+
+
+const Product = ({product,onAddToCart}) => {
     const imgURL=product.image.url;
   return (
     <div>
@@ -26,7 +27,7 @@ const Product = ({product}) => {
                 <Typography dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" color="textSecondary" component="p" />
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="Add to Cart">
+                <IconButton aria-label="Add to Cart" onClick={()=>onAddToCart(product.id,1)}>
                     <AddShoppingCartIcon />
                 </IconButton>
             </CardActions>
