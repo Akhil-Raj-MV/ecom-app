@@ -53,7 +53,7 @@ const CartLayout = ({cart,onUpdateCartQuantity,onRemoveFromCart,onEmptyCart}) =>
                   <Button  size="large" type="button" variant="contained" color="error" onClick={onEmptyHandler}>
                     Empty cart
                   </Button>
-                  <Button component={Link} to="/checkout" size="large" type="button" variant="contained" color="success">
+                  <Button href="/checkout" size="large" type="button" variant="contained" color="success">
                     Checkout
                   </Button>
               </Stack>

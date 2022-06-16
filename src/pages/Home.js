@@ -1,6 +1,7 @@
 import React ,{ useState, useEffect } from 'react'
 import {Route,Switch} from 'react-router-dom'
 import CartLayout from '../components/CartLayout'
+import CheckoutLayout from '../components/CheckoutLayout'
 import TopNav from '../components/Navbar/TopNav'
 import ProductLayout from '../components/ProductLayout'
 import {commerce} from '../lib/commerce'
@@ -44,8 +45,6 @@ const Home = () => {
       setCart(response.cart);
   }
 
-  
-
   useEffect(()=>{
     fetchProducts();
     fetchCart();
@@ -75,6 +74,9 @@ const Home = () => {
                     onRefreshCart={refreshCartHandler}
                     onUpdateCartQuantity={updateCartHandler}
                 />
+            </Route>
+            <Route exact path='/checkout'>
+                  <CheckoutLayout cart={cart}/>
             </Route>
       </Switch>
     </div>
