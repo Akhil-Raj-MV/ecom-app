@@ -1,6 +1,8 @@
 import React ,{ useState, useEffect } from 'react'
 import {Route,Switch} from 'react-router-dom'
+import AboutLayout from '../components/AboutLayout'
 import CartLayout from '../components/CartLayout'
+import CatergoryLayout from '../components/CatergoryLayout'
 import CheckoutLayout from '../components/CheckoutLayout'
 import TopNav from '../components/Navbar/TopNav'
 import ProductLayout from '../components/ProductLayout'
@@ -10,6 +12,7 @@ import {commerce} from '../lib/commerce'
 const Home = () => {
   const [products,setProducts]=useState([]);
   const [cart,setCart]=useState({});
+  const [categories,setCategories]=useState({});
 
   const fetchProducts= async()=>{
       const {data}= await commerce.products.list();
@@ -45,10 +48,18 @@ const Home = () => {
       setCart(response.cart);
   }
 
+  const fetchCategories=async()=>{
+    const response=await commerce.categories.list();
+    setCategories(response);
+  }
+  
+
   useEffect(()=>{
     fetchProducts();
     fetchCart();
+    fetchCategories();
   },[])
+
 
   return (
     <div>
@@ -77,6 +88,12 @@ const Home = () => {
             </Route>
             <Route exact path='/checkout'>
                   <CheckoutLayout cart={cart}/>
+            </Route>
+            <Route exact path='/about'>
+                  <AboutLayout/>
+            </Route>
+            <Route exact path='/category'>
+                  <CatergoryLayout categories={categories.data} onAddToCart={addToCartHandler} />
             </Route>
       </Switch>
     </div>
