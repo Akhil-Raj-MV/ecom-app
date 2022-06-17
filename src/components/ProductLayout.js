@@ -4,7 +4,6 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
-import FormLabel from '@mui/material/FormLabel';
 import Products from "./Products/Products";
 
 
@@ -53,7 +52,7 @@ const ProductLayout = ({products,onAddToCart}) => {
        <>
         <div>
             <FormControl sx={{marginTop:"10px",padding:"20px"}}>
-          <FormLabel id="demo-controlled-radio-buttons-group">Sort By</FormLabel>
+          <Typography variant='h6'>Sort By</Typography>
           <RadioGroup
              row
             aria-labelledby="demo-controlled-radio-buttons-group"
