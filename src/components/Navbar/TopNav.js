@@ -28,6 +28,7 @@ const pages=[
 const settings = ['Logout'];
 
 const TopNav = ({cartItemNo}) => {
+  
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
   const {profile} =useProfile();
@@ -40,7 +41,7 @@ const TopNav = ({cartItemNo}) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
+  const handleCloseNavMenu=() => {
     setAnchorElNav(null);
   };
 
@@ -110,9 +111,18 @@ const TopNav = ({cartItemNo}) => {
               }}
             >
               {pages.map(({page,link}) => (
-                <MenuItem key={page} href={link} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <Box>
+                  <Button 
+                    key={page}
+                    component={Link} 
+                    to={link}
+                    onClick={handleCloseNavMenu}
+                    color="primary"
+                  >
+                    <Typography textAlign="center" variant="title">{page}</Typography> 
+                  </Button>
+                </Box>
+                     
               ))}
             </Menu>
           </Box>
@@ -121,7 +131,8 @@ const TopNav = ({cartItemNo}) => {
             {pages.map(({page,link}) => (
               <Button
                 key={page}
-                href={link}
+                component={Link} 
+                to={link}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >

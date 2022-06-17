@@ -11,6 +11,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 
 const Product = ({product,onAddToCart}) => {
     const imgURL=product.image.url;
+    
   return (
     <div>
         <Card >
@@ -27,7 +28,10 @@ const Product = ({product,onAddToCart}) => {
                 <Typography dangerouslySetInnerHTML={{ __html: product.description }} variant="body2" color="textSecondary" component="p" />
             </CardContent>
             <CardActions disableSpacing>
-                <IconButton aria-label="Add to Cart" onClick={()=>onAddToCart(product.id,1)}>
+                <IconButton 
+                    aria-label="Add to Cart" 
+                    onClick={()=>onAddToCart(product.id,1)} 
+                    sx={{"&:hover, &.Mui-focusVisible":{ color: "green" }}}>
                     <AddShoppingCartIcon />
                 </IconButton>
             </CardActions>
