@@ -60,7 +60,6 @@ const Home = () => {
     fetchCategories();
   },[])
 
-
   return (
     <div>
       <TopNav cartItemNo={cart.total_items}/>

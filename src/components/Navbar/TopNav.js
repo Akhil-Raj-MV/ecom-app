@@ -20,12 +20,14 @@ import { useProfile } from '../../context/profile.context';
 import {useModalState} from '../../misc/custom.hooks'
  
 const pages=[
-  {page:'Home', link:'/home'},
-  {page:'Category',link:'/category'},
-  {page:'Cart',link:'/cart'},
-  {page:'About',link:'/about'}
+  {page:'Home', link:'/home' ,key:'home'},
+  {page:'Category',link:'/category',key:'category'},
+  {page:'Cart',link:'/cart',key:'cart'},
+  {page:'About',link:'/about',key:'about'}
 ]
 const settings = ['Logout'];
+
+
 
 const TopNav = ({cartItemNo}) => {
   
@@ -140,7 +142,7 @@ const TopNav = ({cartItemNo}) => {
               </Button>
             ))}
           </Box>
-    
+
           <Typography
             variant="h6"
             noWrap

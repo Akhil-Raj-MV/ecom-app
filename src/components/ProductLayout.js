@@ -4,12 +4,17 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import Stack from '@mui/material/Stack';
+import SearchIcon from '@mui/icons-material/Search';
 import Products from "./Products/Products";
+import SearchedLayout from './SearchedLayout';
 
 
 const ProductLayout = ({products,onAddToCart}) => {
 
   const [sort,setSort]=useState("");
+  const [searchInput,setSearchInput]=useState("");
 
   const handleChange = (event) => {
     setSort(event.target.value);
@@ -47,28 +52,49 @@ const ProductLayout = ({products,onAddToCart}) => {
       </div>
   )
   }
+  const onChangeInputHandler=(e)=>{
+      setSearchInput(e.target.value);
+  }
+
+ 
+
 
   return (
        <>
-        <div>
+        <Stack  direction={{ xs: 'column', sm: 'row' }}  spacing={{ xs: 1, sm: 2, md: 4 }}>
             <FormControl sx={{marginTop:"10px",padding:"20px"}}>
-          <Typography variant='h6'>Sort By</Typography>
-          <RadioGroup
-             row
-            aria-labelledby="demo-controlled-radio-buttons-group"
-            name="controlled-radio-buttons-group"
-            value={sort}
-            onChange={handleChange}
-          >
-            <FormControlLabel value="none" control={<Radio color="success"/>} label="None" />
-            <FormControlLabel value="plh" control={<Radio color="success"/>} label="price low to high" />
-            <FormControlLabel value="phl" control={<Radio color="success"/>} label="price high to low" />
-          </RadioGroup>
-        </FormControl>
-        </div>
+                <Typography variant='h6'>Sort By</Typography>
+                <RadioGroup
+                  row
+                  aria-labelledby="demo-controlled-radio-buttons-group"
+                  name="controlled-radio-buttons-group"
+                  value={sort}
+                  onChange={handleChange}
+                >
+                  <FormControlLabel value="none" control={<Radio color="success"/>} label="None" />
+                  <FormControlLabel value="plh" control={<Radio color="success"/>} label="price low to high" />
+                  <FormControlLabel value="phl" control={<Radio color="success"/>} label="price high to low" />
+                </RadioGroup>
+            </FormControl>
+            <div style={{maringTop:"30px" ,padding:"40px"}}>
+        
+               <TextField 
+                  sx={{width:300}}
+                  size="small"
+                  label={<SearchIcon/>}
+                  value={searchInput}
+                  onChange={onChangeInputHandler}
+                />
+            
+            </div>
+          </Stack>
+
 
          <div style={{margin:"30px"}}>
-            <Products products={products} onAddToCart={onAddToCart}/>
+            {!searchInput.length &&
+            <Products products={products} onAddToCart={onAddToCart}/>}
+            {searchInput.length &&
+             <SearchedLayout query={searchInput} onAddToCart={onAddToCart}/>}
         </div>
 
       </>
